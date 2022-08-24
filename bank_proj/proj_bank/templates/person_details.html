@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap4/bootstrap.min.css' %}">
+    <title>Loogged In </title>
+    <style>
+        body{ background-image : url({% static 'images/OIP.jpg' %});
+         background-size: cover;
+         margin-top : 5%;
+         margin-bottom : 5%;
+         color : white;
+          text-shadow: white 0px 0px 2px;
+          font-size: 16px;
+         }
+         h1{
+         text-align : center;
+         }
+        #logout{
+        float : right;
+        }
+    </style>
+
+</head>
+<body>
+<div class="container">
+<div>
+        <form class="form-group" method="POST" action="{% url 'submit' %}">
+            <h1>Person Details</h1>
+        {% csrf_token %}
+        <label>Username</label>
+        <input class="form-control" type="text" name="name" placeholder="Enter user name"><br>
+        <label>Date of Birth</label>
+        <input class="form-control" type="date" name="dob" placeholder="Enter user date of birth"><br>
+        <label>Ade</label>
+        <input class="form-control" type="text" name="age" placeholder="Enter user age"<br>
+        <label>Gender</label><br>
+        <input type="radio" name="gender"><label>Male</label><br>
+        <input type="radio" name="gender"><label>Female</label><br>
+        <label>Phone Number</label>
+        <input class="form-control" type="text" name="phone_number" placeholder="Enter user phone_number"><br>
+        <label>Mail ID</label>
+        <input class="form-control" type="email" name="mail_id" placeholder="Enter user Mail ID"><br><br>
+            <label>Address</label>
+        <textarea name="address" rows="5" cols="150"placeholder="Enter your address" ></textarea><br>
+
+        <label>District</label>
+            <select name="dist">
+<!--            <option>&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</option>-->
+                {% for i in dist %}
+                <option value=""> {{i.name}}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+        <label>Branch</label>
+            <select name="branches">
+            {% for i in brn %}
+            <option>{{brn.branch}}</option>
+            {% endfor %}
+            </select>
+            <br><br>
+        <label>Account Type</label>
+            <select name="account" >
+                <option >Savings Account</option>
+                <option>Current Account></option>
+            </select>
+            <br><br>
+        <label>Materials Provide</label><br>
+        <input type="checkbox" name="debit"><label>Debit Card</label><br>
+        <input type="checkbox" name="credit"><label>Credit Card</label><br>
+        <input type="checkbox" name="checkbook"><label>Check Book</label><br><br>
+            <input class="btn btn-primary" type="submit" value="Submit">
+        </form>
+
+    </div>
+</div>
+
+
+<div class="container">
+        <a href="{% url 'logout' %}"><input id="logout" class="btn btn-primary" type="submit" value="Logout"></a>
+        </div>
+</body>
+</html>
